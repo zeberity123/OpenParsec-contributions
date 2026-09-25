@@ -57,6 +57,23 @@ _ = router.reset()
 // UIKit fallback may report modifier flags without a modifier press.
 assert(router.handle(code: 44, pressed: true, spaceShortcut: true) == toggle)
 assert(router.handle(code: 44, pressed: false).isEmpty)
+// UIKit flags must not resurrect a consumed Ctrl/Shift while key-up is delayed.
+for modifier in [224, 225, 228, 229] {
+    assert(router.handle(code: modifier, pressed: true) == [down(modifier)])
+    assert(router.handle(code: 44, pressed: true, spaceShortcut: true) == [up(modifier)] + toggle)
+    assert(router.handle(code: 44, pressed: false).isEmpty)
+    assert(router.handle(code: 44, pressed: true, spaceShortcut: true) == [down(44)])
+    assert(router.handle(code: 44, pressed: false) == [up(44)])
+    assert(router.handle(code: modifier, pressed: false).isEmpty)
+    // After release, a later flags-only shortcut remains supported.
+    assert(router.handle(code: 44, pressed: true, spaceShortcut: true) == toggle)
+    assert(router.handle(code: 44, pressed: false).isEmpty)
+}
+// An incomplete flag snapshot must not override a known multi-modifier chord.
+_ = router.handle(code: 224, pressed: true)
+_ = router.handle(code: 225, pressed: true)
+assert(router.handle(code: 44, pressed: true, spaceShortcut: true) == [down(44)])
+assert(router.reset() == [up(44), up(224), up(225)])
 // Cancellation/disconnection clears consumed keys as well as forwarded keys.
 _ = router.handle(code: 144, pressed: true)
 _ = router.handle(code: 4, pressed: true)

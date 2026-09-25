@@ -26,8 +26,12 @@ struct KoreanKeyboardRouter {
         let modifiers = held.subtracting(consumed).filter { (224...231).contains($0) }
         let shiftOnly = !modifiers.isEmpty && modifiers.allSatisfy { $0 == 225 || $0 == 229 }
         let controlOnly = !modifiers.isEmpty && modifiers.allSatisfy { $0 == 224 || $0 == 228 }
+        // UIKit sometimes supplies only flags, without a modifier key-down.
+        // When we do know the physical state, prefer it: a consumed Ctrl/Shift
+        // may remain in those flags until its delayed key-up arrives.
+        let shortcutFromFlags = spaceShortcut && !held.contains(where: { (224...231).contains($0) })
         let languageKey = code == 144 || code == 230 || (mapBacktick && code == 53)
-        if languageKey || (code == 44 && (spaceShortcut || shiftOnly || controlOnly)) {
+        if languageKey || (code == 44 && (shortcutFromFlags || shiftOnly || controlOnly)) {
             consumed.insert(code)
             return toggle(consumeModifiers: true)
         }
