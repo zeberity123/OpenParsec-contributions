@@ -13,6 +13,7 @@ struct SettingsView: View {
 	@AppStorage("optionAsCommand") var optionAsCommand: Bool = false
 	@AppStorage("koreanKeyboard") var koreanKeyboard: Bool = false
 	@AppStorage("koreanBacktick") var koreanBacktick: Bool = false
+	@AppStorage("capsEscapeFn") var capsEscapeFn: Bool = false
 	@AppStorage("noOverlay") var noOverlay: Bool = false
 	@AppStorage("hideStatusBar") var hideStatusBar: Bool = true
 	@AppStorage("rightClickPosition") var rightClickPosition: RightClickPosition = .firstFinger
@@ -126,6 +127,11 @@ struct SettingsView: View {
                                     Toggle("", isOn: $koreanBacktick).frame(width: 80)
                                 }
                                 Text("Enable only if your keyboard sends ~ for 한/영. This also remaps the real backtick key. Reconnect after changing keyboard settings.")
+                                    .font(.footnote).padding(8)
+                                CatItem("Caps Lock as Esc / Fn") {
+                                    Toggle("", isOn: $capsEscapeFn).frame(width: 80)
+                                }
+                                Text("Tap Caps Lock for Esc. Hold Caps Lock with 1–9, 0, − or = for F1–F12. Other modifiers still work, e.g. Shift+Caps Lock+5 for Shift+F5. Replaces normal Caps Lock. Turn off iPad's Caps Lock language switching if it intercepts the key.")
                                     .font(.footnote).padding(8)
                             }
                         }

@@ -422,7 +422,8 @@ class ParsecViewController: UIViewController, UIScrollViewDelegate, ParsecTouchI
 
 	private func handleKoreanKey(code: Int, pressed: Bool, spaceShortcut: Bool = false) {
 		let events = koreanKeyboard.handle(code: code, pressed: pressed,
-			mapBacktick: SettingsHandler.koreanBacktick, spaceShortcut: spaceShortcut)
+			mapBacktick: SettingsHandler.koreanBacktick, spaceShortcut: spaceShortcut,
+			capsEscapeFn: SettingsHandler.capsEscapeFn)
 		sendKoreanEvents(events)
 	}
 

@@ -12,6 +12,7 @@ struct SettingsHandler {
 	@AppStorage("optionAsCommand") public static var optionAsCommand: Bool = false
 	@AppStorage("koreanKeyboard") public static var koreanKeyboard: Bool = false
 	@AppStorage("koreanBacktick") public static var koreanBacktick: Bool = false
+	@AppStorage("capsEscapeFn") public static var capsEscapeFn: Bool = false
 	@AppStorage("noOverlay") public static var noOverlay: Bool = false
 	@AppStorage("hideStatusBar") public static var hideStatusBar: Bool = true
 	@AppStorage("rightClickPosition") public static var rightClickPosition: RightClickPosition = .firstFinger

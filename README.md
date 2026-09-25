@@ -37,6 +37,13 @@ The optional **Backtick (~) as 한/영** setting also remaps the real backtick k
 iPadOS can reserve shortcuts before they reach the app; if local composition
 interferes, try an English hardware input source on the iPad.
 
+While Windows Korean Keyboard is enabled, compact keyboards can optionally use
+**Caps Lock as Esc / Fn**. Tap Caps Lock for Esc on release, or hold it with
+1–9, 0, minus, or equals for F1–F12. Other modifiers can be added normally, e.g.
+Shift+Caps Lock+5 sends Shift+F5. This mapping is off by default and replaces
+normal Caps Lock. Reconnect after changing it. If iPadOS uses Caps Lock to switch
+languages, disable that behavior in its Hardware Keyboard settings.
+
 ## Game Controllers
 When streaming, press any trigger button in your controller and parsec will recognize it. Make sure to configure the host properly (install virtual USB driver etc.) before using game controllers.
 
